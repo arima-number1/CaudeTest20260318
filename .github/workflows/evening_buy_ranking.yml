@@ -1,0 +1,39 @@
+name: 深井 夕方BUYランキング
+
+on:
+  schedule:
+    # 毎営業日 17:53 JST = 08:53 UTC（月〜金）
+    - cron: '53 8 * * 1-5'
+  workflow_dispatch:   # 手動実行ボタン（いつでも手動で動かせる）
+
+jobs:
+  evening-ranking:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: .
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install requests yfinance python-docx anthropic
+
+      - name: Run evening BUY ranking
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: python3 evening_buy_ranking.py
+
+      - name: Upload log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: evening-ranking-${{ github.run_number }}
+          path: outputs/fukai/evening_buy_ranking.log
+          retention-days: 30
