@@ -17,8 +17,10 @@ from pathlib import Path
 from zoneinfo import ZoneInfo
 from typing import Optional
 
-JST       = ZoneInfo("Asia/Tokyo")
-INDEX_CSV = Path(__file__).parent / "outputs/fukai/deep_research_index.csv"
+JST        = ZoneInfo("Asia/Tokyo")
+BASE_DIR   = Path(__file__).parent
+INDEX_CSV  = BASE_DIR / "outputs/fukai/deep_research_index.csv"
+MASTER_DIR = BASE_DIR / "inputs/raw_data"
 TEAMS_WEBHOOK = (
     "https://defaultbbe542ee9cf543d8beffd7181ba08c.38.environment.api.powerplatform.com"
     ":443/powerautomate/automations/direct/workflows/"
@@ -27,33 +29,37 @@ TEAMS_WEBHOOK = (
     "&sig=Ynn0E8zbujSXWZavhduLJjAwO7GXrtfZsN-aKhdDvxI"
 )
 
-# ── 決算日データ（手動管理、都度更新）─────────────────────
-KESSAN_DATES = {
-    "7085":  "2026-04-13",
-    "3994":  "2026-04-14",
-    "277A":  "2026-04-14",
-    "6146":  "2026-04-22",
-    "6506":  "2026-04-28",
-    "9104":  "2026-04-30",
-    "9101":  "2026-05-11",
-    "9119":  "2026-05-13",
-    "6918":  "2026-05-14",
-    "4047":  "2026-05-13",
-    "4189":  "2026-05-13",
-    "6361":  "2026-05-14",
-    "8316":  "2026-05-15",
-    "4901":  "2026-05-14",
-    "5401":  "2026-05-13",
-    "6287":  "2026-05-09",
-    "5233":  "2026-05-14",
-    "9302":  "2026-05-14",
-    "9672":  "2026-05-15",
-    "4631":  "2026-05-15",
-    "6806":  "2026-05-14",
-    "3048":  "2026-04-10",
-    "1377":  "2026-04-10",
-    "3994":  "2026-04-14",
-}
+# ── 銘柄マスターCSVから次回決算日を自動取得 ────────────────
+def load_kessan_dates() -> dict:
+    """
+    inputs/raw_data/銘柄マスター*.csv の最新ファイルから
+    {コード: "YYYY-MM-DD"} の辞書を返す。
+    コード列フォーマット: "6918 JT Equity" → "6918"
+    日付列フォーマット: "2026/05/14" → "2026-05-14"
+    """
+    import glob
+    files = sorted(glob.glob(str(MASTER_DIR / "銘柄マスター*.csv")))
+    if not files:
+        return {}
+    latest = files[-1]
+    dates = {}
+    try:
+        with open(latest, encoding="utf-8-sig") as f:
+            reader = csv.DictReader(f)
+            for row in reader:
+                # BOMつきキー対応
+                code_raw = row.get("\ufeff銘柄コード", row.get("銘柄コード", "")).strip()
+                m = re.match(r"^([A-Z0-9]{3,5})\s", code_raw)
+                if not m:
+                    continue
+                code = m.group(1)
+                raw_date = row.get("次回決算発表日", "").strip()
+                if raw_date:
+                    # "2026/05/14" → "2026-05-14"
+                    dates[code] = raw_date.replace("/", "-")
+    except Exception as e:
+        print(f"  [銘柄マスター] 読み込み失敗: {e}")
+    return dates
 
 # ── テーマ分類 ─────────────────────────────────────────────
 THEMES = {
@@ -87,8 +93,8 @@ def fetch_price(code: str) -> Optional[float]:
             pass
     return None
 
-def days_to_kessan(code: str) -> Optional[int]:
-    d = KESSAN_DATES.get(code)
+def days_to_kessan(code: str, kessan_dates: dict) -> Optional[int]:
+    d = kessan_dates.get(code)
     if not d:
         return None
     try:
@@ -183,6 +189,12 @@ def run():
         print("  [ERROR] BUY銘柄が見つかりません。")
         return
 
+    # 銘柄マスターから決算日を自動取得
+    kessan_dates = load_kessan_dates()
+    master_file  = sorted(__import__("glob").glob(str(MASTER_DIR / "銘柄マスター*.csv")))
+    master_label = Path(master_file[-1]).name if master_file else "不明"
+    print(f"  決算日ソース: {master_label} ({len(kessan_dates)}銘柄分)")
+
     # リアルタイム株価取得 & スコア算出
     ranked = []
     print(f"  株価取得中... ({len(stocks)}銘柄)")
@@ -206,7 +218,7 @@ def run():
             upside = (tp - sp) / sp * 100
 
         theme   = get_theme(code)
-        days    = days_to_kessan(code)
+        days    = days_to_kessan(code, kessan_dates)
         score   = composite_score(upside, days, theme, judgment)
 
         ranked.append({
