@@ -1,0 +1,67 @@
+name: 9672 東京都競馬 本決算リマインド
+
+on:
+  schedule:
+    # 毎営業日 9:03 JST = 0:03 UTC（5月のみ：月〜金）
+    - cron: '3 0 * 5 1-5'
+  workflow_dispatch:   # 手動実行ボタン（いつでも手動でテスト可）
+
+jobs:
+  remind:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 9672 東京都競馬 — 本決算前 買いリマインド（Teams通知）
+        run: |
+          TODAY=$(TZ='Asia/Tokyo' date '+%Y-%m-%d')
+          python3 - <<'EOF'
+          import requests, os
+          from datetime import datetime
+          from zoneinfo import ZoneInfo
+
+          JST = ZoneInfo("Asia/Tokyo")
+          today = datetime.now(JST).strftime("%Y-%m-%d（%A）")
+
+          TEAMS_WEBHOOK = (
+              "https://defaultbbe542ee9cf543d8beffd7181ba08c.38.environment.api.powerplatform.com"
+              ":443/powerautomate/automations/direct/workflows/"
+              "30db79c373a549adbc94df611f0c8ade/triggers/manual/paths/invoke"
+              "?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0"
+              "&sig=Ynn0E8zbujSXWZavhduLJjAwO7GXrtfZsN-aKhdDvxI"
+          )
+
+          msg = f"""【⏰ 毎朝リマインド】9672 東京都競馬 — 本決算まで残りわずか！
+
+          📅 本日：{today}
+          🎯 決算予定：2026年5月下旬（本決算）
+
+          ━━━━━━━━━━━━━━━━━━━━━━━━━━
+          ■ 投資判断：BUY（深井 2026-04-15）
+          ■ 現在値ターゲット：¥5,790 → FV ¥7,200〜¥8,400（+24〜+45%）
+          ■ 損切りライン：¥4,900
+
+          ✅ 本日のチェックリスト
+          □ 第1トランシェ50%（¥5,790周辺）エントリー済みか？
+          □ 未エントリーなら本日打診買いを検討
+          □ 残り50%は決算×増配/自社株買い確認後に追加
+
+          ━━━━━━━━━━━━━━━━━━━━━━━━━━
+          🔑 決算で確認すること
+          ① 増配・自社株買い発表の有無
+          ② 東京サマーランド再開発/売却報道
+          ③ 不動産含み益の開示
+          ④ FCFが▲10%超悪化なら損切り
+
+          ━━━━━━━━━━━━━━━━━━━━━━━━━━
+          📌 なぜ上がらないか（深井診断）
+          「地味事業×東京都が筆頭株主×成長ストーリー欠如×含み益の見えにくさ」
+          →バリュートラップではなく「放置されたバリュー株」。カタリストさえ来れば動く。
+
+          _深井 竹村トレードカンパニー_"""
+
+          try:
+              r = requests.post(TEAMS_WEBHOOK, json={"text": msg}, timeout=15)
+              print(f"Teams通知送信: HTTP {r.status_code}")
+          except Exception as e:
+              print(f"通知エラー: {e}")
+          EOF
