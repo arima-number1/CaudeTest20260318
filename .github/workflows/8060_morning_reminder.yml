@@ -1,0 +1,26 @@
+name: 8060 キヤノンMJ 押し目リマインド（〜4/22決算）
+
+on:
+  schedule:
+    # 毎営業日 8:47 JST = 前日 23:47 UTC（月〜金）
+    - cron: '47 23 * * 0-4'
+  workflow_dispatch:   # 手動実行ボタン
+
+jobs:
+  morning-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install requests yfinance pandas
+
+      - name: Check 8060 push level & notify Teams
+        run: python3 8060_morning_check.py
