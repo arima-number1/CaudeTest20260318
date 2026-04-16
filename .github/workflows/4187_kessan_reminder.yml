@@ -1,0 +1,28 @@
+name: 4187 大阪有機化学工業 2Q決算リマインド（7/10）
+
+on:
+  schedule:
+    # 7/8・7/9・7/10 の朝 8:52 JST = 前日 23:52 UTC
+    - cron: '52 23 7 7 *'   # 7/8 JST
+    - cron: '52 23 8 7 *'   # 7/9 JST
+    - cron: '52 23 9 7 *'   # 7/10 JST（決算当日）
+  workflow_dispatch:
+
+jobs:
+  kessan-reminder:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install requests yfinance pandas
+
+      - name: Remind 4187 2Q earnings & notify Teams
+        run: python3 4187_kessan_reminder.py
