@@ -1,0 +1,26 @@
+name: 2884 ヨシムラ・フード 中国ホタテ解禁ウォッチ
+
+on:
+  schedule:
+    # 毎営業日 8:52 JST = 前日 23:52 UTC（月〜金）
+    - cron: '52 23 * * 0-4'
+  workflow_dispatch:   # 手動実行ボタン
+
+jobs:
+  hotate-watch:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install requests yfinance pandas
+
+      - name: Watch 中国ホタテ解禁 & notify Teams
+        run: python3 2884_hotate_watch.py
