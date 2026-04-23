@@ -1,0 +1,47 @@
+name: TDnet Live Scan（10分ごと）
+
+on:
+  schedule:
+    # 毎10分 JST = UTC-9h。市場時間帯（JST 8:30〜15:30）に絞る
+    # JST 08:31 = UTC 23:31 (前日) → cron: 31 23 * * 0-4  (日〜木)
+    # JST 09:01〜15:01 (10分毎) = UTC 00:01〜06:01 (月〜土)
+    - cron: '31 23 * * 0-4'   # JST 08:31（前場寄り前）月〜金
+    - cron: '1,11,21,31,41,51 0 * * 1-5'   # JST 09:01〜09:51 月〜金
+    - cron: '1,11,21,31,41,51 1 * * 1-5'   # JST 10:01〜10:51
+    - cron: '1,11,21,31,41,51 2 * * 1-5'   # JST 11:01〜11:51
+    - cron: '1,11,21,31,41,51 3 * * 1-5'   # JST 12:01〜12:51
+    - cron: '1,11,21,31,41,51 4 * * 1-5'   # JST 13:01〜13:51
+    - cron: '1,11,21,31,41,51 5 * * 1-5'   # JST 14:01〜14:51
+    - cron: '1,11 6 * * 1-5'               # JST 15:01〜15:11（後場引け前後）
+  workflow_dispatch:   # 手動テスト用
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8   # 10分サイクルなので余裕をもって8分でタイムアウト
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          pip install -q anthropic yfinance beautifulsoup4 requests pandas numpy
+
+      - name: Run TDnet scan (once)
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          python tdnet_scanner.py --once
+
+      - name: Commit scan output
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add outputs/asai/live_scan_*.md outputs/asai/.seen_ids.json || true
+          git diff --cached --quiet || git commit -m "auto: live_scan $(TZ=Asia/Tokyo date '+%Y%m%d_%H%M')"
+          git push || echo "push skipped (no changes)"
