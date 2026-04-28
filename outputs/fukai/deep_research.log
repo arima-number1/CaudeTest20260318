@@ -1,0 +1,135 @@
+08:58:51 [深井] ╔══════════════════════════════════════╗
+08:58:51 [深井] ║  深井 DeepResearch エンジン 起動       ║
+08:58:51 [深井] ╚══════════════════════════════════════╝
+08:58:51 [深井] 監視モード開始 — research_priority_list.md の変更を検知します
+08:58:51 [深井] ═══ DeepResearch 開始: [PANW] パロアルトネットワークス(US) (スコア +70) ═══
+08:58:51 [深井]   [PANW] パロアルトネットワークス(US) — Claude API 呼び出し中...
+09:01:11 [深井] HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+09:01:11 [深井]   [Markdown] PANW_パロアルトネット_BUY_DeepResearch_20260404.md
+09:01:13 [深井]   [Word] PANW_パロアルトネット_BUY_DeepResearch_20260404.docx
+09:01:14 [深井]   [Teams] 通知送信完了 (HTTP 202)
+09:01:14 [深井]   [リスト更新] PANW → ✅ 完了
+09:01:14 [深井] ═══ DeepResearch 完了: [PANW] パロアルトネットワークス(US) ═══
+
+09:01:44 [深井] リスト変更を検知 — DeepResearch を実行します
+09:01:44 [深井] ═══ DeepResearch 開始: [41860] 東応化 (スコア +72) ═══
+09:01:44 [深井]   [41860] 東応化 — Claude API 呼び出し中...
+09:04:05 [深井] HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+09:04:05 [深井]   [Markdown] 41860_東応化_BUY_DeepResearch_20260404.md
+09:04:06 [深井]   [Word] 41860_東応化_BUY_DeepResearch_20260404.docx
+09:04:06 [深井]   [Teams] 通知送信完了 (HTTP 202)
+09:04:06 [深井]   [リスト更新] 41860 → ✅ 完了
+09:04:06 [深井] ═══ DeepResearch 完了: [41860] 東応化 ═══
+
+09:04:36 [深井] リスト変更を検知 — DeepResearch を実行します
+09:04:36 [深井] ═══ DeepResearch 開始: [9990] ワットマン (スコア +70) ═══
+09:04:36 [深井]   [9990] ワットマン — Claude API 呼び出し中...
+09:06:57 [深井] HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+09:06:57 [深井]   [Markdown] 9990_ワットマン_BUY_DeepResearch_20260404.md
+09:06:58 [深井]   [Word] 9990_ワットマン_BUY_DeepResearch_20260404.docx
+09:06:58 [深井]   [Teams] 通知送信完了 (HTTP 202)
+09:06:58 [深井]   [リスト更新] 9990 → ✅ 完了
+09:06:58 [深井] ═══ DeepResearch 完了: [9990] ワットマン ═══
+
+09:07:28 [深井] リスト変更を検知 — DeepResearch を実行します
+09:07:28 [深井] ═══ DeepResearch 開始: [9619] イチネンHD (スコア +60) ═══
+09:07:28 [深井]   [9619] イチネンHD — Claude API 呼び出し中...
+09:09:44 [深井] HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+09:09:44 [深井]   [Markdown] 9619_イチネンHD_BUY_DeepResearch_20260404.md
+09:09:44 [深井]   [Word] 9619_イチネンHD_BUY_DeepResearch_20260404.docx
+09:09:44 [深井]   [Teams] 通知送信完了 (HTTP 202)
+09:09:44 [深井]   [リスト更新] 9619 → ✅ 完了
+09:09:44 [深井] ═══ DeepResearch 完了: [9619] イチネンHD ═══
+
+09:10:14 [深井] リスト変更を検知 — DeepResearch を実行します
+09:10:15 [深井] ═══ DeepResearch 開始: [6479] 放電精密加工研究所 (スコア +58) ═══
+09:10:15 [深井]   [6479] 放電精密加工研究所 — Claude API 呼び出し中...
+09:12:30 [深井] HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+09:12:30 [深井]   [Markdown] 6479_放電精密加工研究_BUY_DeepResearch_20260404.md
+09:12:31 [深井]   [Word] 6479_放電精密加工研究_BUY_DeepResearch_20260404.docx
+09:12:31 [深井]   [Teams] 通知送信完了 (HTTP 202)
+09:12:31 [深井]   [リスト更新] 6479 → ✅ 完了
+09:12:31 [深井] ═══ DeepResearch 完了: [6479] 放電精密加工研究所 ═══
+
+09:13:01 [深井] リスト変更を検知 — DeepResearch を実行します
+09:13:01 [深井] ═══ DeepResearch 開始: [62790] 瑞光 (スコア +55) ═══
+09:13:01 [深井]   [62790] 瑞光 — Claude API 呼び出し中...
+09:15:27 [深井] HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+09:15:27 [深井]   [Markdown] 62790_瑞光_BUY_DeepResearch_20260404.md
+09:15:27 [深井]   [Word] 62790_瑞光_BUY_DeepResearch_20260404.docx
+09:15:28 [深井]   [Teams] 通知送信完了 (HTTP 202)
+09:15:28 [深井]   [リスト更新] 62790 → ✅ 完了
+09:15:28 [深井] ═══ DeepResearch 完了: [62790] 瑞光 ═══
+
+09:15:58 [深井] リスト変更を検知 — DeepResearch を実行します
+09:15:58 [深井] ═══ DeepResearch 開始: [33330] あさひ (スコア +52) ═══
+09:15:58 [深井]   [33330] あさひ — Claude API 呼び出し中...
+09:18:24 [深井] HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+09:18:24 [深井]   [Markdown] 33330_あさひ_BUY_DeepResearch_20260404.md
+09:18:24 [深井]   [Word] 33330_あさひ_BUY_DeepResearch_20260404.docx
+09:18:24 [深井]   [Teams] 通知送信完了 (HTTP 202)
+09:18:24 [深井]   [リスト更新] 33330 → ✅ 完了
+09:18:24 [深井] ═══ DeepResearch 完了: [33330] あさひ ═══
+
+09:18:54 [深井] リスト変更を検知 — DeepResearch を実行します
+09:18:54 [深井] ═══ DeepResearch 開始: [34980] 霞ヶ関キャピタル (スコア +42) ═══
+09:18:54 [深井]   [34980] 霞ヶ関キャピタル — Claude API 呼び出し中...
+09:21:11 [深井] HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+09:21:11 [深井]   [Markdown] 34980_霞ヶ関キャピタル_BUY_DeepResearch_20260404.md
+09:21:11 [深井]   [Word] 34980_霞ヶ関キャピタル_BUY_DeepResearch_20260404.docx
+09:21:12 [深井]   [Teams] 通知送信完了 (HTTP 202)
+09:21:12 [深井]   [リスト更新] 34980 → ✅ 完了
+09:21:12 [深井] ═══ DeepResearch 完了: [34980] 霞ヶ関キャピタル ═══
+
+09:21:42 [深井] リスト変更を検知 — DeepResearch を実行します
+09:21:42 [深井] ═══ DeepResearch 開始: [46670] アイサンテクノロジー (スコア -85) ═══
+09:21:42 [深井]   [46670] アイサンテクノロジー — Claude API 呼び出し中...
+09:24:04 [深井] HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+09:24:04 [深井]   [Markdown] 46670_アイサンテクノロ_SELL_DeepResearch_20260404.md
+09:24:05 [深井]   [Word] 46670_アイサンテクノロ_SELL_DeepResearch_20260404.docx
+09:24:05 [深井]   [Teams] 通知送信完了 (HTTP 202)
+09:24:05 [深井]   [リスト更新] 46670 → ✅ 完了
+09:24:05 [深井] ═══ DeepResearch 完了: [46670] アイサンテクノロジー ═══
+
+09:24:35 [深井] リスト変更を検知 — DeepResearch を実行します
+09:24:35 [深井] ═══ DeepResearch 開始: [40880] エア・ウォーター (スコア -82) ═══
+09:24:35 [深井]   [40880] エア・ウォーター — Claude API 呼び出し中...
+09:27:01 [深井] HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+09:27:01 [深井]   [Markdown] 40880_エア・ウォーター_SELL_DeepResearch_20260404.md
+09:27:01 [深井]   [Word] 40880_エア・ウォーター_SELL_DeepResearch_20260404.docx
+09:27:01 [深井]   [Teams] 通知送信完了 (HTTP 202)
+09:27:01 [深井]   [リスト更新] 40880 → ✅ 完了
+09:27:01 [深井] ═══ DeepResearch 完了: [40880] エア・ウォーター ═══
+
+09:27:31 [深井] リスト変更を検知 — DeepResearch を実行します
+09:27:31 [深井] ═══ DeepResearch 開始: [73630] Ｇ－ベビーカレンダー (スコア -82) ═══
+09:27:31 [深井]   [73630] Ｇ－ベビーカレンダー — Claude API 呼び出し中...
+09:29:51 [深井] HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+09:29:51 [深井]   [Markdown] 73630_Ｇ－ベビーカレン_SELL_DeepResearch_20260404.md
+09:29:51 [深井]   [Word] 73630_Ｇ－ベビーカレン_SELL_DeepResearch_20260404.docx
+09:29:51 [深井]   [Teams] 通知送信完了 (HTTP 202)
+09:29:51 [深井]   [リスト更新] 73630 → ✅ 完了
+09:29:51 [深井] ═══ DeepResearch 完了: [73630] Ｇ－ベビーカレンダー ═══
+
+09:30:21 [深井] リスト変更を検知 — DeepResearch を実行します
+09:30:21 [深井] ═══ DeepResearch 開始: [89280] 穴吹興産 (スコア -72) ═══
+09:30:21 [深井]   [89280] 穴吹興産 — Claude API 呼び出し中...
+09:32:47 [深井] HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+09:32:47 [深井]   [Markdown] 89280_穴吹興産_SELL_DeepResearch_20260404.md
+09:32:47 [深井]   [Word] 89280_穴吹興産_SELL_DeepResearch_20260404.docx
+09:32:47 [深井]   [Teams] 通知送信完了 (HTTP 202)
+09:32:47 [深井]   [リスト更新] 89280 → ✅ 完了
+09:32:47 [深井] ═══ DeepResearch 完了: [89280] 穴吹興産 ═══
+
+09:33:17 [深井] リスト変更を検知 — DeepResearch を実行します
+09:33:17 [深井] ═══ DeepResearch 開始: [72560] 河西工業 (スコア -68) ═══
+09:33:17 [深井]   [72560] 河西工業 — Claude API 呼び出し中...
+09:35:39 [深井] HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+09:35:39 [深井]   [Markdown] 72560_河西工業_SELL_DeepResearch_20260404.md
+09:35:39 [深井]   [Word] 72560_河西工業_SELL_DeepResearch_20260404.docx
+09:35:39 [深井]   [Teams] 通知送信完了 (HTTP 202)
+09:35:39 [深井]   [リスト更新] 72560 → ✅ 完了
+09:35:39 [深井] ═══ DeepResearch 完了: [72560] 河西工業 ═══
+
+09:36:09 [深井] リスト変更を検知 — DeepResearch を実行します
+09:36:09 [深井] 優先度1の銘柄が見つかりません
